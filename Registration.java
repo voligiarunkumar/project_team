@@ -1,7 +1,13 @@
 package inventory_management;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class Registration {
 
 private String username;
@@ -39,6 +45,20 @@ public long getPhono() {
 }
 public void setPhono(long phono) {
 	this.phono = phono;
+}
+public void registration_insert() throws SQLException, ClassNotFoundException {
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+	//Statement st=con.createStatement();
+	String sql= "insert into customer values (?,?,?,?);";
+	@SuppressWarnings("unused")
+	PreparedStatement stmt =con.prepareStatement(sql);
+	stmt.setString(1, username);
+	stmt.setString(2,adderss);
+	stmt.setLong(3, phono);
+	stmt.setString(4, create_password);
+	stmt.execute();
+	System.out.println("inserted");
 }
 public void registration_details(ArrayList<Registration> arr) {
 	

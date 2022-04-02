@@ -1,4 +1,5 @@
 package inventory_management;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,16 +24,19 @@ public class Mainclass {
 		System.out.println("4.exit");
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub1
 		int opt;
 		
 	//@SuppressWarnings("unused")
     	registration();
+		
+    	
       int opt1;
 	do {
     	  @SuppressWarnings("unused")
 		Registration r=new Registration();
+    	  
     	  @SuppressWarnings("resource")
 		Scanner se=new Scanner(System.in);
     	  opt1=se.nextInt();
@@ -53,19 +57,27 @@ public class Mainclass {
     		  System.out.println("reenter password:");
    		        se=new Scanner(System.in);
    		       r.setReenter_password(se.nextLine());
+   		      
     		   registration.add(r);
-    		   r.registration_details(registration);
+    		   r.registration_insert();
+    		   //r.registration_details(registration);
     		  // menu();
+    		   
     		   break;
     	  case 2:
     		  login l= new login();
         	  System.out.println("enter username");
         	  @SuppressWarnings("unused") 
         	  Scanner sc1=new Scanner(System.in);
-        	   l.setUsername(sc1.nextLine());
-        	   l.setPassword(sc1.nextLine());
+        	  ///String username = sc1.nextLine();
+        	  l.setUsername(sc1.nextLine());
+        	  System.out.println("enter password");
+        	    Scanner sc11=new Scanner(System.in);
+        	   l.setPassword(sc11.nextLine());
+        	   
+        	   //l.validate_login(username);
                login.add(l);
-               l.login_details(login);
+               //l.login_details(login);
                //menu();
     		    break;
     		    
@@ -73,9 +85,9 @@ public class Mainclass {
     		   admin_login al= new admin_login();
          	  System.out.println("enter username");
          	  @SuppressWarnings({ "unused", "resource" }) 
-         	  Scanner sc11=new Scanner(System.in);
-         	   al.setUsername(sc11.nextLine());
-         	   al.setPassword(sc11.nextLine());
+         	  Scanner sc111=new Scanner(System.in);
+         	   al.setUsername(sc111.nextLine());
+         	   al.setPassword(sc111.nextLine());
                 adminlogin.add(al);
                 al.adlogin_details(adminlogin);
                 menu();
