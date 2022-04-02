@@ -59,7 +59,13 @@ public class Mainclass {
    		       r.setReenter_password(se.nextLine());
    		      
     		   registration.add(r);
+    		   if(Registration.check==1 && Registration.check1==1) {
     		   r.registration_insert();
+    		   }
+    		   else {
+    			   System.out.println("Your data is not meet our requirement please provide again");
+    			   registration();
+    		   }
     		   //r.registration_details(registration);
     		  // menu();
     		   
