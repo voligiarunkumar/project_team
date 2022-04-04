@@ -18,10 +18,17 @@ public class Mainclass {
 	}
 	static  void menu()
 	{
-		System.out.println("1.Add New Iteam");
-		System.out.println("2.Display all iteams");
-		System.out.println("3.Add customer details");
-		System.out.println("4.exit");
+		System.out.println("+==============================================================================================+");
+		System.out.println("\t\t\t\t   1.Add New Item");
+		System.out.println("\t\t\t\t   2.Delete item");
+		System.out.println("\t\t\t\t   3.check customer details");
+		System.out.println("\t\t\t\t   4.check customer ordered details");
+		System.out.println("\t\t\t\t   5.cancel ordered food");
+		System.out.println("\t\t\t\t   6.check payment details");
+		System.out.println("\t\t\t\t   7.change price for item");
+		System.out.println("\t\t\t\t   8.check for delivery satus");
+		System.out.println("\t\t\t\t   9.display items");
+		System.out.println("+===============================================================================================+");
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -89,53 +96,55 @@ public class Mainclass {
     		    
     	   case 3:
     		   admin_login al= new admin_login();
-         	  System.out.println("enter username");
-         	  @SuppressWarnings({ "unused", "resource" }) 
-         	  Scanner sc111=new Scanner(System.in);
+         	   System.out.println("enter username:");
+                Scanner sc111=new Scanner(System.in);
          	   al.setUsername(sc111.nextLine());
+         	   System.out.println("enter password:");
+         	   sc111=new Scanner(System.in);
          	   al.setPassword(sc111.nextLine());
-                adminlogin.add(al);
-                al.adlogin_details(adminlogin);
-                menu();
+            	   
+                do {
+        			@SuppressWarnings({ "unused", "resource" }) 
+        			Scanner sc1111= new Scanner(System.in);
+        		   shop s =new shop();
+        			opt=sc1111.nextInt();
+        			switch(opt) {
+        			case 1:
+        				System.out.println("enter item_no");
+        				s.setItem_no(sc1111.nextInt());
+                        System.out.println("enter item_name");
+        				sc1111= new Scanner(System.in);
+        				s.setItem_name(sc1111.nextLine());
+        				System.out.println("enter item_price");
+        				sc1111=new Scanner(System.in);
+        				s.setItem_price(sc1111.nextInt());
+        				System.out.println("enter item_avilabilty");
+        				sc1111=new Scanner(System.in);
+        				s.setItem_avail(sc1111.nextLine());
+        				//s.addnewitem(s);  
+        	            shopList.add(s);
+        				System.out.println("--------Added new items for add more choose again-------------");
+        				break;
+        			case 2:
+        				  System.out.println("enter item_no that you want to delete");
+        				  sc1111=new Scanner(System.in);
+        				  s.setItem_no1(sc1111.nextInt());
+        				break;
+        			case 3:
+        				customer_deatils();
+        				Customer c=new Customer();
+        				c.displaycustomer_details(custList);
+        				break;
+        			default:
+        				break;
+        				
+        			}
+        		}while(opt!=0);
+
      		    break;
      		    }
     	     }while(opt1!=0);
-	menu();
-		  
-		do {
-			@SuppressWarnings({ "unused", "resource" }) 
-			Scanner sc1= new Scanner(System.in);
-		   shop s =new shop();
-			opt=sc1.nextInt();
-			switch(opt) {
-			case 1:
-				System.out.println("enter item_no");
-				s.setItem_no(sc1.nextInt());
-                System.out.println("enter item_name");
-				sc1= new Scanner(System.in);
-				s.setItem_name(sc1.nextLine());
-				System.out.println("enter item_price");
-				sc1=new Scanner(System.in);
-				s.setItem_price(sc1.nextInt());
-				//s.addnewitem(s);  
-	            shopList.add(s);
-				System.out.println("--------Added new items--------------");
-				break;
-			case 2:
-				s.displayitems(shopList);
-				break;
-			case 3:
-				customer_deatils();
-				Customer c=new Customer();
-				c.displaycustomer_details(custList);
-				break;
-			default:
-				break;
-				
-			}
-		}while(opt!=0);
-}
-	@SuppressWarnings("resource")
+	}
 	public  static void   customer_deatils() {
 		Scanner sc = new Scanner(System.in);
 		Customer c=new Customer();

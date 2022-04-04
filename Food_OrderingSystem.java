@@ -1,5 +1,10 @@
 package inventory_management;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class Food_OrderingSystem {
@@ -8,16 +13,27 @@ public class Food_OrderingSystem {
     public static String more;
     public static int choose,quantity=1;
     public static double total=0,pay;
-    public static void menu(){
+    public static void menu() throws ClassNotFoundException, SQLException{
+    	
     	System.out.println("\t\t\t\t\tONLINE FOOD ORDERING SYSTEM");
-    System.out.println("\t\t\t\t+===================================+");
-    System.out.println("\t\t\t\t           Menu List        ");
-    System.out.println("  \t\t\t\t ITEM NAME \t\tITEM PRICE    ");
-    System.out.println("\t\t\t\t   1. BURGER            200.00");
-    System.out.println("\t\t\t\t   2.PIZZA              349.00");
-    System.out.println("\t\t\t\t   3.WHITE SAUCE       300.00");
-   // System.out.println("\t\t\t\t   4                       ");
-    System.out.println("\t\t\t\t+====================================+");
+    	System.out.println("+=====================================================================================================================+");
+        System.out.println("\t\t\t\t\t         MENU LIST       ");
+        System.out.println("+=====================================================================================================================+");
+    	System.out.println("  \t\t\t\t ITEM_ID\t\tITEM NAME\t\tITEM_PRICE\t\tITEM_AVAILABILITY");
+    	//Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+		Statement st=con.createStatement();
+		  ResultSet rs=st.executeQuery("select *from foodtable order by item_no");
+		  while(rs.next()) {
+			  int a=rs.getInt(1);
+			  String b=rs.getString(2);
+			  int c= rs.getInt(3);
+			  String d= rs.getString(4);
+			  
+			  System.out.println("\t\t\t\t"+a+"\t\t\t"+b+"\t\t\t "+c+"\t\t\t\t"+d );
+			  
+	 }
+      System.out.println("+=========================================================================================================================+");
     }
     public static void payment() {
     	System.out.println("Total price is " + total);
@@ -53,7 +69,19 @@ public class Food_OrderingSystem {
             order();//call the method you to create 
         }
         else{
-        	payment();
+        	System.out.println("press 1 to order 2 for add to cart");
+             @SuppressWarnings({ "resource" })
+			Scanner sc=new Scanner(System.in);
+             int  opt = sc.nextInt();
+             switch(opt){
+               case 1:
+            	   payment();
+               case 2:
+   
+            	
+        	
+        	
+             }
             }
         }
     else if(choose==2){
@@ -93,5 +121,9 @@ public class Food_OrderingSystem {
         order();
     }
     }
+	private static void swich(int opt) {
+		// TODO Auto-generated method stub
+		
+	}
   
     }	

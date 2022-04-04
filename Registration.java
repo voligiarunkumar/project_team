@@ -3,14 +3,15 @@ package inventory_management;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class Registration {
-
-private String username;
+private static String username1;
+private static String username;
 private String adderss;
 private long phono;
 private String create_password;
@@ -36,6 +37,7 @@ public void setReenter_password(String reenter_password) {
 public String getUsername() {
 	return username;
 }
+@SuppressWarnings("static-access")
 public void setUsername(String username) {
 	this.username = username;
 	validateUsernameAndPassword.isValidUsername(username);
@@ -66,12 +68,24 @@ public void setPhono(long phono) {
 //{
 //	}
 
+@SuppressWarnings("static-access")
 public void registration_insert() throws SQLException, ClassNotFoundException {
 	
-	 Class.forName("com.mysql.jdbc.Driver");
+	 Class.forName("com.mysql.cj.jdbc.Driver");
 	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
-	//Statement st=con.createStatement();
-	String sql= "insert into customer values (?,?,?,?);";
+	Statement st=con.createStatement();
+	ResultSet rs=st.executeQuery("select username from customer");
+	Registration r=new Registration();
+	 while(rs.next()) 
+	  {
+ 	  String a=rs.getString(1);
+ 	 r.username1=a;
+	  }
+	 if(Registration.username.equals(Registration.username1)) {
+		 System.out.println("username already peresent");
+	 }
+	 else {
+	String sql= "insert into customer (username,address,phono,create_password)values (?,?,?,?);";
 	@SuppressWarnings("unused")
 	PreparedStatement stmt =con.prepareStatement(sql);
 	stmt.setString(1, username);
@@ -80,7 +94,11 @@ public void registration_insert() throws SQLException, ClassNotFoundException {
 	stmt.setString(4, create_password);
 	stmt.execute();
 	System.out.println("inserted");
+	   login login = new login();
+	   System.out.println("than you for regirstering click 2 to login");
+	//login.validate_login();
         }
+}
 
 
 public void registration_details(ArrayList<Registration> arr) {

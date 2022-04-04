@@ -33,8 +33,8 @@ class validateUsernameAndPassword {
         {
 
             // Regex to check valid password.
-            String regex = "^(?=.*[0-9])"
-                    + "(?=.*[a-z])(?=.*[A-Z])"
+            String regex = "(?=.*[a-z])(?=.*[A-Z])"+"^(?=.*[0-9])"
+                    +"(?=.*[a-z])(?=.*[A-Z])"
                     + "(?=.*[@#$%^&+=])"
                     + "(?=\\S+$).{8,20}$";
 
@@ -57,34 +57,5 @@ class validateUsernameAndPassword {
             return m.matches();
         }
 }
-
-//        /*public static void main(String[] args)
-//        {
-//            @SuppressWarnings("resource")
-//			Scanner sc= new Scanner(System.in); //System.in is a standard input stream
-//            System.out.print("Enter username: ");
-//            String str= sc.nextLine();              //reads string
-//           validateUsernameAndPassword.isValidUsername(str);
-//
-//            if (isValidUsername(str)==true){
-//                System.out.println("username is valid");
-//            }else{
-//                System.out.println("enter Valid username:");
-//            }
-//            @SuppressWarnings({ "unused", "resource" })
-//			Scanner sc1= new Scanner(System.in); //System.in is a standard input stream
-//            System.out.print("Enter password: ");
-//            String str1= sc.nextLine();              //reads string
-//            validateUsernameAndPassword.isValidPassword(str1);
-//
-//            if (isValidUsername(str)==true){
-//                System.out.println("Password is valid");
-//            }else{
-//                System.out.println("enter Valid Password:");
-//            }
-//
-//
-//        }
-//    }*/
-//
+        
 
