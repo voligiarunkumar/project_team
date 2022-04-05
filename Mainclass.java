@@ -11,14 +11,16 @@ public class Mainclass {
 	public static ArrayList<Customer> custList=new ArrayList<Customer>();
 	static void registration()
 	{
-		System.out.println("1.registration");
-		System.out.println("2.login");
-		System.out.println("3.adminlogin");
+		System.out.println("+=====================================================welcome to food ordering portal==========================================================================+");
+		System.out.println("\t\t\t\t\t\t\t\t1.registration");
+		System.out.println("\t\t\t\t\t\t\t\t2.login");
+		System.out.println("\t\t\t\t\t\t\t\t3.adminlogin");
+		System.out.println("+=============================================================================================================================================================  +");
 		
 	}
 	static  void menu()
 	{
-		System.out.println("+==============================================================================================+");
+		System.out.println("+===============================================================================================+");
 		System.out.println("\t\t\t\t   1.Add New Item");
 		System.out.println("\t\t\t\t   2.Delete item");
 		System.out.println("\t\t\t\t   3.check customer details");
@@ -28,6 +30,7 @@ public class Mainclass {
 		System.out.println("\t\t\t\t   7.change price for item");
 		System.out.println("\t\t\t\t   8.check for delivery satus");
 		System.out.println("\t\t\t\t   9.display items");
+		System.out.println("\t\t\t\t   10.change name of the item");
 		System.out.println("+===============================================================================================+");
 	}
 
@@ -37,8 +40,6 @@ public class Mainclass {
 		
 	//@SuppressWarnings("unused")
     	registration();
-		
-    	
       int opt1;
 	do {
     	  @SuppressWarnings("unused")
@@ -110,15 +111,15 @@ public class Mainclass {
         			opt=sc1111.nextInt();
         			switch(opt) {
         			case 1:
-        				System.out.println("enter item_no");
+        				System.out.println("enter item_no:");
         				s.setItem_no(sc1111.nextInt());
-                        System.out.println("enter item_name");
+                        System.out.println("enter item_name:");
         				sc1111= new Scanner(System.in);
         				s.setItem_name(sc1111.nextLine());
-        				System.out.println("enter item_price");
+        				System.out.println("enter item_price:");
         				sc1111=new Scanner(System.in);
         				s.setItem_price(sc1111.nextInt());
-        				System.out.println("enter item_avilabilty");
+        				System.out.println("enter item_avilabilty:");
         				sc1111=new Scanner(System.in);
         				s.setItem_avail(sc1111.nextLine());
         				//s.addnewitem(s);  
@@ -131,10 +132,52 @@ public class Mainclass {
         				  s.setItem_no1(sc1111.nextInt());
         				break;
         			case 3:
-        				customer_deatils();
-        				Customer c=new Customer();
-        				c.displaycustomer_details(custList);
+        				System.out.println("choose 1 for search by id 2 display all:");
+        				sc111=new Scanner(System.in);
+        				int check=sc111.nextInt();
+        				if(check==1) {
+        				System.out.println("enter the username of the cust_id:");
+        				sc1111=new Scanner(System.in);
+        			     s.setCust_id(sc1111.nextInt());
+        				}
+        				else if(check==2) {
+        					shop.display_all_customer();
+        				}
+//        				customer_deatils();
+//        				Customer c=new Customer();
+//        				c.displaycustomer_details(custList);
         				break;
+        			case 7:
+        				System.out.println("enter  item_no:");
+        				sc1111= new Scanner(System.in);
+        				s.setItem_no3(sc1111.nextInt());
+        				System.out.println("enter  item_price:");
+        				sc1111= new Scanner(System.in);
+        				s.setItem_price3(sc1111.nextInt());
+        				break;
+        				
+        			case 9:
+        				 System.out.println("choose 1 for search by id 2 for dispaly all");
+        				 sc111=new Scanner(System.in);
+         				int check1=sc111.nextInt();
+         				if(check1==1) {
+         				System.out.println("enter the username of the food_id:");
+         				sc1111=new Scanner(System.in);
+         			     s.setItem_no2(sc1111.nextInt());
+         				}
+         				else if(check1==2) {
+         					shop.display_all_food_items();
+         				}       		
+        				 break;
+        			case 10:
+        				System.out.println("enter  item_no:");
+        				sc1111= new Scanner(System.in);
+        				s.setItem_no4(sc1111.nextInt());
+        				System.out.println("enter  item_name:");
+        				sc1111= new Scanner(System.in);
+        				s.setItem_name4(sc1111.nextLine());
+        				break;
+        				
         			default:
         				break;
         				
@@ -146,6 +189,7 @@ public class Mainclass {
     	     }while(opt1!=0);
 	}
 	public  static void   customer_deatils() {
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		Customer c=new Customer();
 		System.out.println("enter customer name:");

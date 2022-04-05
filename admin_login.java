@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class admin_login {
 		private static String adusername;
 		private static String adPassword;
-	 public static int check1=0;
+	    public static int check1=0;
 		public String getUsername() {
 			return adusername;
 		}
