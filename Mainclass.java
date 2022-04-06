@@ -136,7 +136,7 @@ public class Mainclass {
         				sc111=new Scanner(System.in);
         				int check=sc111.nextInt();
         				if(check==1) {
-        				System.out.println("enter the username of the cust_id:");
+        				System.out.println("enter the the cust_id:");
         				sc1111=new Scanner(System.in);
         			     s.setCust_id(sc1111.nextInt());
         				}
