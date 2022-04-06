@@ -1,7 +1,7 @@
 package inventory_management;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+//import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,10 +28,11 @@ public class admin_login {
 		}
 		public static void validate_adlogin( ) throws SQLException, ClassNotFoundException
 		{
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+			//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
+			Connection con=Conect.createc();
 			Statement st=con.createStatement();
-			  @SuppressWarnings("unused")
-		     ResultSet rs=st.executeQuery("select username,password from admin");
+			//Connection con=Conect.createc();
+			  ResultSet rs=st.executeQuery("select username,password from admin");
 			  //login l=new login();
 			  
 			
@@ -51,7 +52,7 @@ public class admin_login {
 				}
 				else
 				{
-					System.out.println("admin details not found");
+					System.out.println("Admin details not found");
 					//Mainclass.registration();
 					//System.console();
 				}
@@ -66,8 +67,8 @@ public class admin_login {
 		public void adlogin_details(ArrayList<admin_login> arr)
 		{
 			for(admin_login adlogin:arr)
-			{ System.out.println("username:"+adlogin.adusername);
-			  System.out.println("password:"+adlogin.adPassword);
+			{ System.out.println("Username:"+adlogin.adusername);
+			  System.out.println("Password:"+adlogin.adPassword);
 			}
 		}
 

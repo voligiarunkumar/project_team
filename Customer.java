@@ -52,11 +52,11 @@ public void displaycustomer_details(ArrayList<Customer> arr) {
 	  for(Customer customer:arr)
 	  {
 		  System.out.println("i");
-		  System.out.println("customer_id:"+customer.customer_id);
-		   System.out.println("customer_name:"+customer.customer_name);
-		   System.out.println("customer_id:"+customer.item_no);
-		   System.out.println("customer_name:"+customer.total_bill);
-		   System.out.println("purchase_qty:"+customer.purchase_qty);
+		  System.out.println("Customer_id:"+customer.customer_id);
+		   System.out.println("Customer_name:"+customer.customer_name);
+		   System.out.println("Customer_id:"+customer.item_no);
+		   System.out.println("Customer_name:"+customer.total_bill);
+		   System.out.println("Purchase_qty:"+customer.purchase_qty);
 		   System.exit(0);
 	  
 }

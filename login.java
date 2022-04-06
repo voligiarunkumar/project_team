@@ -1,8 +1,8 @@
 package inventory_management;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,10 +32,10 @@ public class login {
 	@SuppressWarnings("static-access")
 	public static void validate_login( ) throws SQLException, ClassNotFoundException
 	{ 
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+		Connection con=Conect.createc();
+		//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
 		Statement st=con.createStatement();
-		  @SuppressWarnings("unused")
-//		  ResultSet rs1=st.executeQuery("select cust_id from customer where username="+username+"and password="+Password);
+		  //		  ResultSet rs1=st.executeQuery("select cust_id from customer where username="+username+"and password="+Password);
 //		  while(rs1.next())
 //		  {
 //		     @SuppressWarnings("unused")
@@ -69,8 +69,8 @@ public class login {
 		}
 		  }
             if(count!=1) {
-            	System.out.println("newuser");
-            	System.out.println("choose option above for selection:");
+            	System.out.println("New user Register yourself:");
+            	System.out.println("Choose option above for selection:");
   
             }
            
@@ -81,8 +81,8 @@ public class login {
 	public void login_details(ArrayList<login> arr)
 	{
 		for(login login:arr)
-		{ System.out.println("username:"+login.username);
-		  System.out.println("password:"+login.Password);
+		{ System.out.println("Username:"+login.username);
+		  System.out.println("Password:"+login.Password);
 		}
 	}
 

@@ -1,7 +1,7 @@
 package inventory_management;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+//import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -88,6 +88,7 @@ public class shop {
 			return item_name4;
 		}
 
+		@SuppressWarnings("static-access")
 		public void setItem_name4(String item_name4) throws ClassNotFoundException, SQLException {
 			this.item_name4 = item_name4;
 			change_item_name();
@@ -116,80 +117,67 @@ public class shop {
 
 	public void add_newitem() throws ClassNotFoundException, SQLException
 	{
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
-		@SuppressWarnings("unused")
-		Statement st=con.createStatement();
+		//Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=Conect.createc();
+		//Statement st=con.createStatement();
 		//ResultSet rs=st.executeQuery("insert into foodtable from customer");
 		String sql= "insert into foodtable (item_no,item_name,item_price,item_avail)values (?,?,?,?);";
-		@SuppressWarnings("unused")
 		PreparedStatement stmt =con.prepareStatement(sql);
 		stmt.setInt(1, item_no);
 		stmt.setString(2,item_name);
 		stmt.setLong(3, item_price);
 		stmt.setString(4,item_avail);
 		stmt.execute();
-		System.out.println("inserted");
-		System.out.println("choose option above for selection:");
+		System.out.println("Inserted");
+		System.out.println("Choose option above for selection:");
 	}
 	public void delete_item() throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+		//Class.forName("com.mysql.cj.jdbc.Driver");
+		//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
+		Connection con=Conect.createc();
 		@SuppressWarnings("unused")
-		Statement st=con.createStatement();
-		@SuppressWarnings("unused")
+		//Statement st=con.createStatement();
 		String sql= "delete from  foodtable where item_no="+item_no1;
-		@SuppressWarnings("unused")
 		PreparedStatement stmt =con.prepareStatement(sql);
 		stmt.execute();
-		System.out.println("done");
-		System.out.println("choose option above for selection:");
+		System.out.println("Done");
+		System.out.println("Choose option above for selection:");
 	}
 	public void check_customer_details() throws ClassNotFoundException, SQLException
 	{
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
-		@SuppressWarnings("unused")
+		//Class.forName("com.mysql.cj.jdbc.Driver");
+		//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
+		Connection con=Conect.createc();
 		Statement st=con.createStatement();
 		 ResultSet rs=st.executeQuery("select *from customer where cust_id="+cust_id);
 		  while(rs.next()) {
-			  @SuppressWarnings("unused")
-			int a=rs.getInt(1);
-			  @SuppressWarnings("unused")
-			String b=rs.getString(2);
-			  @SuppressWarnings("unused")
-			String c= rs.getString(3);
-			  @SuppressWarnings("unused")
-			long d= rs.getLong(4);
-			  @SuppressWarnings("unused")
-			String e=rs.getString(5);
+			  int a=rs.getInt(1);
+			  String b=rs.getString(2);
+			  String c= rs.getString(3);
+			  long d= rs.getLong(4);
+			  String e=rs.getString(5);
 			  System.out.println("\t\t"+a+"\t\t"+b+"\t\t "+c+"\t\t"+d+"\t\t"+e);
 		  }
-		  System.out.println("choose option above for selection:");
+		  System.out.println("Choose option above for selection:");
 	}
 public static void display_all_customer() throws ClassNotFoundException, SQLException {
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
-	@SuppressWarnings("unused")
+	//Class.forName("com.mysql.cj.jdbc.Driver");
+	Connection con=Conect.createc();
 	Statement st=con.createStatement();
 	 ResultSet rs=st.executeQuery("select *from customer");
 	  while(rs.next()) {
-		  @SuppressWarnings("unused")
-		int a=rs.getInt(1);
-		  @SuppressWarnings("unused")
-		String b=rs.getString(2);
-		  @SuppressWarnings("unused")
-		String c= rs.getString(3);
-		  @SuppressWarnings("unused")
-		long d= rs.getLong(4);
-		  @SuppressWarnings("unused")
-		String e=rs.getString(5);
+		  int a=rs.getInt(1);
+		  String b=rs.getString(2);
+		  String c= rs.getString(3);
+		  long d= rs.getLong(4);
+		  String e=rs.getString(5);
 		 System.out.println("\t\t"+a+"\t\t"+b+"\t\t "+c+"\t\t"+d+"\t\t"+e);
 	  }
-	  System.out.println("choose option above for selection:");
+	  System.out.println("Choose option above for selection:");
 }
 public static void display_all_food_items() throws SQLException {
-	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+	//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
+	Connection con=Conect.createc();
 	Statement st=con.createStatement();
 	  ResultSet rs=st.executeQuery("select *from foodtable order by item_no");
 	  while(rs.next()) {
@@ -200,10 +188,11 @@ public static void display_all_food_items() throws SQLException {
 		  
 		  System.out.println("\t\t\t\t"+a+"\t\t\t"+b+"\t\t\t "+c+"\t\t\t\t"+d );
 	  }
-	  System.out.println("choose option above for selection:");
+	  System.out.println("Choose option above for selection:");
 }
 public void display_food_items() throws SQLException {
-	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+	//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+	Connection con=Conect.createc();
 	Statement st=con.createStatement();
 	  ResultSet rs=st.executeQuery("select *from foodtable where item_no="+item_no2);
 	  while(rs.next()) {
@@ -214,11 +203,12 @@ public void display_food_items() throws SQLException {
 		  
 		  System.out.println("\t\t\t\t"+a+"\t\t\t"+b+"\t\t\t "+c+"\t\t\t\t"+d );
 	  }
-	  System.out.println("choose option above for selection:");
+	  System.out.println("Choose option above for selection:");
 }
 public void change_price_item() throws ClassNotFoundException, SQLException{
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+	//Class.forName("com.mysql.cj.jdbc.Driver");
+	//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
+	Connection con=Conect.createc();
 	@SuppressWarnings("unused")
 	Statement st=con.createStatement();
 	String sql= "update foodtable set item_price=? where item_no=?;";
@@ -227,19 +217,20 @@ public void change_price_item() throws ClassNotFoundException, SQLException{
 	stmt.setInt(2,item_no3);
 	int i=stmt.executeUpdate();
 	if(i>0) {
-		System .out.println("record updated scuccessfully");
+		System .out.println("Record updated scuccessfully");
 	}
 	else {
-		System .out.println("not updated");
+		System .out.println("Not updated");
 		
 	}
-	System.out.println("choose option above for selection:");
+	System.out.println("Choose option above for selection:");
 }
 public void change_item_name() throws ClassNotFoundException, SQLException{
 	int check = 0;
-	Class.forName("com.mysql.cj.jdbc.Driver");
+	//Class.forName("com.mysql.cj.jdbc.Driver");
 	
-	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+	//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
+	Connection con=Conect.createc();
 	@SuppressWarnings("unused")
 	Statement st=con.createStatement();
 	ResultSet rs=st.executeQuery("select item_name from foodtable ");
@@ -255,8 +246,8 @@ public void change_item_name() throws ClassNotFoundException, SQLException{
 			
 		}
 		if(check>0)
-		System.out.println("food item already present");
-		System.out.println("choose option above for selection:");
+		System.out.println("Food item already present");
+		System.out.println("Choose option above for selection:");
 	}
 	if (check<1) {
 		
@@ -267,13 +258,13 @@ public void change_item_name() throws ClassNotFoundException, SQLException{
 	stmt.setInt(2,item_no4);
 	int i=stmt.executeUpdate();
 	if(i>0) {
-		System .out.println("record updated scuccessfully");
+		System .out.println("Record updated scuccessfully");
 	}
 	else {
-		System .out.println("not updated");
+		System .out.println("Not updated");
 		
 	}
-	System.out.println("choose option above for selection:");
+	System.out.println("Choose option above for selection:");
 	}
 }
   
@@ -281,10 +272,10 @@ public void change_item_name() throws ClassNotFoundException, SQLException{
 public void displayitems(ArrayList<shop> arr) {
 	   for(shop shop:arr)
 	   {
-		  System.out.println("i");
-		   System.out.println("item no:"+shop.item_no);
-		   System.out.println("item name:"+shop.item_name);
-		   System.out.println("item price:"+shop.item_price);
+		  
+		   System.out.println("Item no:"+shop.item_no);
+		   System.out.println("Item name:"+shop.item_name);
+		   System.out.println("Item price:"+shop.item_price);
 		   System.exit(0);
 	   }	
 		
