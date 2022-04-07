@@ -25,7 +25,7 @@ public void setCreate_password(String create_password) {
        System.out.println("Password is valid");  
        check=check+1;}
 else {
-	System.out.println("please enter the valid password");
+	System.out.println("Please enter the valid password");
 }
 }
 public String getReenter_password() {
@@ -43,11 +43,11 @@ public void setUsername(String username) {
 	validateUsernameAndPassword.isValidUsername(username);
 	if (validateUsernameAndPassword.isValidUsername(username)==true){
  
-		System.out.println("username is valid");
+		System.out.println("Username is valid");
 		check1=check1+1;
     }
 	else {
-	 System.out.println("please enter the valid user name");
+	 System.out.println("Please enter the valid user name");
 		 //Mainclass.registration();
 }
 }
@@ -70,9 +70,9 @@ public void setPhono(long phono) {
 
 @SuppressWarnings("static-access")
 public void registration_insert() throws SQLException, ClassNotFoundException {
-	
-	 Class.forName("com.mysql.cj.jdbc.Driver");
-	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","arunkumar@123");
+	Connection con=Conect.createc();
+	 //Class.forName("com.mysql.cj.jdbc.Driver");
+	//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
 	Statement st=con.createStatement();
 	ResultSet rs=st.executeQuery("select username from customer");
 	Registration r=new Registration();
@@ -86,37 +86,37 @@ public void registration_insert() throws SQLException, ClassNotFoundException {
 	 }
 	 else {
 	String sql= "insert into customer (username,address,phono,create_password)values (?,?,?,?);";
-	@SuppressWarnings("unused")
 	PreparedStatement stmt =con.prepareStatement(sql);
 	stmt.setString(1, username);
 	stmt.setString(2,adderss);
 	stmt.setLong(3, phono);
 	stmt.setString(4, create_password);
 	stmt.execute();
-	System.out.println("inserted");
+	System.out.println("Inserted");
 	   login login = new login();
-	   System.out.println("than you for regirstering click 2 to login");
+	   System.out.println("Thank you for regirstering click 2 to login");
 	//login.validate_login();
         }
 }
 
 
+@SuppressWarnings("static-access")
 public void registration_details(ArrayList<Registration> arr) {
 	
 
 for( Registration registration:arr)
-{ System.out.println("username:"+registration.username);
-System.out.println("address:"+registration.adderss);
-System.out.println("phono:"+registration.phono);
-System.out.println("createpass"+registration.create_password);
-System.out.println("reenter_password:"+registration.reenter_password);
+{ System.out.println("Username:"+registration.username);
+System.out.println("Address:"+registration.adderss);
+System.out.println("Phono:"+registration.phono);
+System.out.println("Createpass"+registration.create_password);
+System.out.println("Re-Enter_password:"+registration.reenter_password);
 if(registration.create_password.equals(registration.reenter_password))
 {
 	Mainclass.menu();
 
 }
 else {
-	System.out.println("mismatch with pasword");
+	System.out.println("Mismatch with pasword");
 	Mainclass.registration();
 	}
 
