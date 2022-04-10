@@ -404,6 +404,15 @@ public class shop {
 		public void setItem_no4(int item_no4) {
 			this.item_no4 = item_no4;
 		}
+		public int getOrder_id() {
+			return order_id;
+		}
+
+		public void setOrder_id(int order_id) throws SQLException {
+			this.order_id = order_id;
+			check_ordered_details();
+			
+		}
 
 	private static int item_no;
 	private static String item_name;
@@ -416,6 +425,38 @@ public class shop {
     private int  item_no3;
 	private int item_no4;
 	private static String item_name4;
+	private static int order_id;
+	private int del_cust_id;
+	private int cncl_food_id;
+	private int cncl_order_id;
+
+	public int getCncl_order_id() {
+		return cncl_order_id;
+	}
+
+	public void setCncl_order_id(int cncl_order_id) throws SQLException {
+		this.cncl_order_id = cncl_order_id;
+		cancel_ordered_item1();
+	}
+
+	public int getCncl_food_id() {
+		return cncl_food_id;
+	}
+
+	public void setCncl_food_id(int cncl_food_id) throws SQLException {
+		this.cncl_food_id = cncl_food_id;
+		cancel_ordered_item();
+	}
+
+	public int getDel_cust_id() {
+		return del_cust_id;
+	}
+
+	public void setDel_cust_id(int del_cust_id) throws SQLException {
+		this.del_cust_id = del_cust_id;
+		delete_customer();
+		
+	}
 
 	public void add_newitem() throws ClassNotFoundException, SQLException
 	{
@@ -435,14 +476,14 @@ public class shop {
 			
 			
 		}
-		if(check1>1) {
+		if(check1<=0) {
 			System.out.println("\t\t\t\tGIVE CORRECT INFORMATION FOR ADD NEW ITEM");
 			System.out.println("**Entered item number is already present or item name already present or item_price is less than zero please add new item again**");
 			
 		}
 		
 	    Mainclass.menu();
-	    if(check1<=0) {
+	    if(check1>1) {
 		try {
 			String sql= "insert into foodtable (item_no,item_name,item_price,item_avail)values (?,?,?,?);";
 			PreparedStatement stmt =con.prepareStatement(sql);
@@ -504,6 +545,45 @@ public static void display_all_customer() throws ClassNotFoundException, SQLExce
 		 System.out.println("\t\t"+a+"\t\t"+b+"\t\t "+c+"\t\t"+d+"\t\t"+e);
 	  }
 	  System.out.println("Choose option above for selection:");
+}
+public static void check_all_ordered_details() throws SQLException {
+	Connection con=Conect.createc();
+	Statement st=con.createStatement();
+	@SuppressWarnings("unused")
+	ResultSet rs=st.executeQuery("select customer.username,order_table.order_id,order_table.cust_id,order_table.food_id,order_table.order_date,order_table.order_time,order_table.food_qty from customer, order_table where customer.cust_id=order_table.cust_id");
+	System.out.println("\t\tUSER_NAME\t\tORDER_ID\tCUST_ID\t\tFOOD_ID\t\tORDER_DATE\t\tORDER_TIME\t\tFOOD_QTY");
+	while(rs.next()) {
+		String g=rs.getString(1);
+		int a=rs.getInt(2);
+		int b=rs.getInt(3);
+		int f=rs.getInt(4);
+		String c=rs.getString(5);
+		String d=rs.getString(6);
+		int e=rs.getInt(7);
+		
+		System.out.println("\t\t"+g+"\t\t"+a+"\t\t"+b+"\t\t "+f+"\t\t"+c+"\t\t"+d+"\t\t"+e);
+		
+	}
+	System.out.println("Choose option above for selection:");
+	
+}
+public static void check_ordered_details() throws SQLException {
+	Connection con=Conect.createc();
+	Statement st=con.createStatement();
+	ResultSet rs=st.executeQuery("select customer.username,order_table.order_id,order_table.cust_id,order_table.food_id,order_table.order_date,order_table.order_time,order_table.food_qty from customer, order_table where customer.cust_id=order_table.cust_id and order_id="+order_id);
+	System.out.println("\t\tUSER_NAME\t\tORDER_ID\tCUST_ID\t\tFOOD_ID\t\tORDER_DATE\t\tORDER_TIME\t\tFOOD_QTY");
+	while(rs.next()) {
+	String g=rs.getString(1);
+	int a=rs.getInt(2);
+	int b=rs.getInt(3);
+	int f=rs.getInt(4);
+	String c=rs.getString(5);
+	String d=rs.getString(6);
+	int e=rs.getInt(7);
+	
+	System.out.println("\t\t"+g+"\t\t"+a+"\t\t"+b+"\t\t "+f+"\t\t"+c+"\t\t"+d+"\t\t"+e);
+	}
+	System.out.println("Choose option above for selection:");
 }
 public static void display_all_food_items() throws SQLException {
 	//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
@@ -597,7 +677,69 @@ public void change_item_name() throws ClassNotFoundException, SQLException{
 	System.out.println("Choose option above for selection:");
 	}
 }
-  
+public void delete_customer() throws SQLException
+{
+	Connection con=Conect.createc();
+	
+	String sql= "delete from customer where cust_id="+del_cust_id;
+	PreparedStatement stmt =con.prepareStatement(sql);
+	stmt.execute();
+	System.out.println("Done");
+	System.out.println("Choose option above for selection:");
+
+}
+public  void cancel_ordered_item() throws SQLException {
+Connection con=Conect.createc();
+     
+	String sql= "delete from order_table where food_id="+cncl_food_id;
+	PreparedStatement stmt =con.prepareStatement(sql);
+	stmt.execute();
+	System.out.println("Done");
+	System.out.println("Choose option above for selection:");
+	
+}
+public void cancel_ordered_item1() throws SQLException {
+	Connection con=Conect.createc();
+    
+	String sql= "delete from order_table where order_id="+cncl_order_id;
+	PreparedStatement stmt =con.prepareStatement(sql);
+	stmt.execute();
+	System.out.println("Done");
+	System.out.println("Choose option above for selection:");
+	
+}
+public static void check_payment_deatils() throws SQLException {
+	Connection con=Conect.createc();
+	Statement st=con.createStatement();
+	ResultSet rs=st.executeQuery("select *from payment_table ");
+	System.out.println("\t\tPAYMENT_ID\tPRICE\t\tORDER_ID");
+	while(rs.next()) {
+	
+	int a=rs.getInt(1);
+	int b=rs.getInt(2);
+	int f=rs.getInt(3);
+	System.out.println("\t\t"+a+"\t\t"+b+"\t\t"+f);
+	}	
+	System.out.println("Choose option above for selection:");
+	
+	
+}
+public static void check_delivery_status() throws SQLException {
+	Connection con=Conect.createc();
+	Statement st=con.createStatement();
+	ResultSet rs=st.executeQuery("select *from delivery_table ");
+	System.out.println("\tDelivery_id\tdelivery_location\texcepted_arrival\tORDER_ID");
+	while(rs.next()) {
+	
+	int a=rs.getInt(1);
+	String b=rs.getString(2);
+	String c=rs.getString(3);
+	int f=rs.getInt(3);
+	System.out.println("\t"+a+"\t\t\t"+b+"\t\t\t"+c+"\t\t\t"+f);
+	}	
+	
+}
+
 
 public void displayitems(ArrayList<shop> arr) {
 	   for(shop shop:arr)
@@ -610,6 +752,8 @@ public void displayitems(ArrayList<shop> arr) {
 	   }	
 		
 	}
+
+
 
 
 

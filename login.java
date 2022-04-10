@@ -99,6 +99,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class login {
 	private static String username;
@@ -123,46 +124,43 @@ public class login {
 	}
 	@SuppressWarnings("static-access")
 	public static void validate_login( ) throws SQLException, ClassNotFoundException
-	{ int id=0;
+	{ 
 	@SuppressWarnings("unused")
 
 	
 		Connection con=Conect.createc();
 		//Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/arun","root","root");
 		Statement st=con.createStatement();
-		String q1="select cust_id from customer where username=? and create_password=?";
-    	PreparedStatement pst1=con.prepareStatement(q1);
-    	pst1.setString(1,username);
-    	pst1.setString(2, Password);
-    	ResultSet set= pst1.executeQuery();
-    	if(set.next())
-    	{
-    		 
-			  id=set.getInt(1);
-			  
-    		
-    		
-    	}		  
-	     ResultSet rs11=st.executeQuery("select username,create_password from customer");
-		  int  count=0;
+		
+	     ResultSet rs11=st.executeQuery("select username,create_password,cust_id from customer");
+		  int  check=0;
 		  while(rs11.next()) 
 		  { 		
             try {
 			if(rs11.getString(1).equals(login.username)&&rs11.getString(2).equals(login.Password)) {
 				
-				count+=count;
+				check=check+1;
 			System.out.println("*******VALID USER********");
-			 System.out.println("YOUR CUSTOMER ID IS:"+id);
-				
-				  
+			 System.out.println("YOUR CUSTOMER ID IS:"+rs11.getInt(3));
+		     System.out.println("*choose 1 to order:\n*choose 2 to cancel order:");
+			@SuppressWarnings("resource")
+			Scanner se=new Scanner(System.in);
+	    	  int opt1 = se.nextInt();
+	    
+		      switch(opt1) {
+		    	  case 1:
 				Food_OrderingSystem fo=new Food_OrderingSystem();
 				 fo.menu();
 				 fo.order();
-				 fo.payment();
-				 
+				 //fo.payment();
+				 break;
+		    	  case 2:
+		    		  order_table.cancel_order();
+		    		  break;
+		              }
 			}
 			order_table or =new order_table();
-			or.setCust_id(id);
+			or.setCust_id(rs11.getInt(3));
 	   
 		
 			}
@@ -171,7 +169,7 @@ public class login {
 			e.printStackTrace();
 		}
 		  }
-            if(count!=1) 
+     if (check!=1) 
             {
             	System.out.println("New user Register yourself:");
             	System.out.println("Choose option above for selection:");

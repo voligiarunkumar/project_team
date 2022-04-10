@@ -233,18 +233,20 @@ public class Mainclass {
 	}
 	static  void menu()
 	{
-		System.out.println("+===============================================================================================+");
+		System.out.println("+================================================================================================================================================================+");
 		System.out.println("\t\t\t\t   1.Add New Item");
 		System.out.println("\t\t\t\t   2.Delete item");
 		System.out.println("\t\t\t\t   3.Check customer details");
 		System.out.println("\t\t\t\t   4.Check customer ordered details");
-		System.out.println("\t\t\t\t   5.Cancel ordered food");
+		System.out.println("\t\t\t\t   5.Check Canceled order");
 		System.out.println("\t\t\t\t   6.Check payment details");
 		System.out.println("\t\t\t\t   7.Change price for item");
 		System.out.println("\t\t\t\t   8.Check for delivery satus");
 		System.out.println("\t\t\t\t   9.Display items");
 		System.out.println("\t\t\t\t   10.Change name of the item");
-		System.out.println("+===============================================================================================+");
+		System.out.println("\t\t\t\t   11.Delete customer");
+		System.out.println("\t\t\t\t   12.Cancel ordered item");
+		System.out.println("+================================================================================================================================================================+");
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -292,16 +294,16 @@ public class Mainclass {
     		   break;
     	  case 2:
     		  login l= new login();
-        	  System.out.println("enter username");
+        	  System.out.println("Enter username");
         	  Scanner sc1=new Scanner(System.in);
         	  ///String username = sc1.nextLine();
         	  l.setUsername(sc1.nextLine());
-        	  System.out.println("enter password");
+        	  System.out.println("Enter password");
         	    Scanner sc11=new Scanner(System.in);
         	   l.setPassword(sc11.nextLine());
         	   
         	   //l.validate_login(username);
-               login.add(l);
+               //login.add(l);
                //l.login_details(login);
                //menu();
     		    break;
@@ -366,6 +368,26 @@ public class Mainclass {
 //        				c.displaycustomer_details(custList);
         				break;
         				}
+        			case 4:
+        				if(admin_login.check1>0) {
+        					System.out.println("Choose 1 for search by id 2 display all:");
+        					sc111=new Scanner(System.in);
+            				int check=sc111.nextInt();
+            				if(check==1) {
+            				System.out.println("Enter the order_id:");
+            				sc1111=new Scanner(System.in);
+            			     s.setOrder_id(sc1111.nextInt());
+            				}
+            				else if(check==2) {
+            					shop.check_all_ordered_details();
+            				}
+        				}
+        			    break;
+        			case 6:
+        				if(admin_login.check1>0)
+        					shop.check_payment_deatils();
+        				
+        			      break;
         			case 7:
         				if(admin_login.check1>0) {
         				System.out.println("Enter  item_no:");
@@ -376,6 +398,12 @@ public class Mainclass {
         				s.setItem_price3(sc1111.nextInt());
         				break;
         				}
+        			case 8:
+        				if(admin_login.check1>0)
+        				{
+        					shop.check_delivery_status();
+        				}
+       
         				
         			case 9:
         				if(admin_login.check1>0) {
@@ -401,6 +429,33 @@ public class Mainclass {
         				sc1111= new Scanner(System.in);
         				s.setItem_name4(sc1111.nextLine());
         				break;
+        				}
+        				
+        			case 11:
+        				if(admin_login.check1>0) {
+        				System.out.println("Enter customer_id:");
+        				s.setDel_cust_id(sc1111.nextInt());
+        				
+        				break;
+        				}
+        			case 12:
+        				if(admin_login.check1>0) {
+        	            System.out.println("Choose 1 for Cancel  order by order_id");
+        	            System.out.println("Choose 2 for Cancel order by food_id ");
+        	            sc1111= new Scanner(System.in);
+        	            int choose=sc1111.nextInt();
+        	            if(choose==1) {
+        	            	System.out.println("Enter order_id:");
+       	            	    s.getCncl_order_id();
+        	            }
+        	            else if(choose==2) {
+        	            	System.out.println("Enter Food_id:");
+    				        s.setCncl_food_id(sc1111.nextInt());
+            	                       
+            	            	
+            	          }
+        	           
+						  break;
         				}
         			default:
         				break;
