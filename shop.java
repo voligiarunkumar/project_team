@@ -734,7 +734,7 @@ public static void check_delivery_status() throws SQLException {
 	int a=rs.getInt(1);
 	String b=rs.getString(2);
 	String c=rs.getString(3);
-	int f=rs.getInt(3);
+	int f=rs.getInt(4);
 	System.out.println("\t"+a+"\t\t\t"+b+"\t\t\t"+c+"\t\t\t"+f);
 	}	
 	
