@@ -165,6 +165,7 @@ public class Food_OrderingSystem {
     public static double total=0,pay;
     public static String getstring;
     static order_table or =new order_table();
+    static Cartt cart=new Cartt();
     public static void menu() throws ClassNotFoundException, SQLException{
    
     	System.out.println("\t\t\t\t\tONLINE FOOD ORDERING SYSTEM");
@@ -254,6 +255,7 @@ public class Food_OrderingSystem {
         	   or.delivery();
         	   payment();
            case 2:
+        	   
         }}
     else{
     	System.out.println("You Enter Invalid value, Choose food again");

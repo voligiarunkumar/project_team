@@ -727,16 +727,23 @@ public static void check_payment_deatils() throws SQLException {
 public static void check_delivery_status() throws SQLException {
 	Connection con=Conect.createc();
 	Statement st=con.createStatement();
-	ResultSet rs=st.executeQuery("select *from delivery_table ");
-	System.out.println("\tDelivery_id\tdelivery_location\texcepted_arrival\tORDER_ID");
+	ResultSet rs=st.executeQuery("select delivery_table.del_id,delivery_table.delivery_location,delivery_table.expected_arrival,delivery_table.order_id,order_table.order_time from order_table,delivery_table group by delivery_table.del_id");
+	System.out.println("\tDelivery_id\t\tdelivery_location\t\texcepted_arrival\tORDER_ID\t\tORDER_TIME");
 	while(rs.next()) {
 	
 	int a=rs.getInt(1);
 	String b=rs.getString(2);
 	String c=rs.getString(3);
 	int f=rs.getInt(4);
-	System.out.println("\t"+a+"\t\t\t"+b+"\t\t\t"+c+"\t\t\t"+f);
+	String g=rs.getString(5);
+	System.out.println("\t"+a+"\t\t\t"+b+"\t\t\t"+c+"\t\t\t"+f+"\t\t\t"+g);
 	}	
+	
+}
+public static void change_delivery_status() throws SQLException {
+	Connection con=Conect.createc();
+	Statement st=con.createStatement();
+	ResultSet rs=st.executeQuery("update delivery_table set expected_arrival= ? where order_id="+order_id);
 	
 }
 

@@ -241,7 +241,7 @@ public class Mainclass {
 		System.out.println("\t\t\t\t   5.Check Canceled order");
 		System.out.println("\t\t\t\t   6.Check payment details");
 		System.out.println("\t\t\t\t   7.Change price for item");
-		System.out.println("\t\t\t\t   8.Check for delivery satus");
+		System.out.println("\t\t\t\t   8.Check for delivery status");
 		System.out.println("\t\t\t\t   9.Display items");
 		System.out.println("\t\t\t\t   10.Change name of the item");
 		System.out.println("\t\t\t\t   11.Delete customer");
@@ -402,9 +402,16 @@ public class Mainclass {
         				if(admin_login.check1>0)
         				{
         					shop.check_delivery_status();
+        					System.out.println("Choose 1 for enter expected arriaval time");
+        					int choose=sc1111.nextInt();
+        					if(choose==1)
+        					{
+        						
+        					}
+        					
         				}
        
-        				
+        				break;
         			case 9:
         				if(admin_login.check1>0) {
         				 System.out.println("Choose 1 for search by Id 2 for Dispaly all");
