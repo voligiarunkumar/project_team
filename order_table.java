@@ -139,10 +139,10 @@ public static void cancel_order() throws ClassNotFoundException, SQLException {
 	Connection con=Conect.createc();
 	java.sql.Statement st=con.createStatement();
 	System.out.println(or.getCust_id());
-	ResultSet rs = st.executeQuery("select customer.username,order_table.order_id,order_table.cust_id,order_table.food_id,order_table.order_date,order_table.order_time,order_table.food_qty from customer, order_table where customer.cust_id=order_table.cust_id and customer.cust_id="+cust_id1);
+	ResultSet rs = st.executeQuery("select customer.username,order_table.order_id,order_table.cust_id,order_table.food_id,order_table.order_date,order_table.order_time,order_table.food_qty,delivery_table.expected_arrival from customer, order_table,delivery_table where order_table.order_id=delivery_table.order_id and customer.cust_id=order_table.cust_id and customer.cust_id="+cust_id1);
 	
 	System.out.println("Items Selected for order");
-	System.out.println("\t\tUSER_NAME\t\tORDER_ID\tCUST_ID\t\tFOOD_ID\t\tORDER_DATE\t\tORDER_TIME\t\tFOOD_QTY");
+	System.out.println("\t\tUSER_NAME\t\tORDER_ID\tCUST_ID\t\tFOOD_ID\t\tORDER_DATE\t\tORDER_TIME\t\tFOOD_QTY\tEXPECTED ARRIVAL");
 	 
 	while(rs.next()) {
 		  String g=rs.getString(1);
@@ -152,7 +152,8 @@ public static void cancel_order() throws ClassNotFoundException, SQLException {
 			String c=rs.getString(5);
 			String d=rs.getString(6);
 			int e=rs.getInt(7);
-			System.out.println("\t\t"+g+"\t\t"+a+"\t\t"+b+"\t\t "+f+"\t\t"+c+"\t\t"+d+"\t\t"+e);
+			String h=rs.getString(8);
+			System.out.println("\t\t"+g+"\t\t"+a+"\t\t"+b+"\t\t "+f+"\t\t"+c+"\t\t"+d+"\t\t"+e+"\t\t"+h);
 	 
 	  }
 	  System.out.println("Enter Food Id to cancel the order");

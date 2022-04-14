@@ -39,7 +39,7 @@ public class admin_login {
 	      	 
 			  while(rs.next()) 
 			  {
-	            try {
+	           
 				if(rs.getString(1).equals(admin_login.adusername)&&rs.getString(2).equals(admin_login.adPassword)) {
 					check1=check1+1;
 					System.out.println("Valid_user");
@@ -47,37 +47,19 @@ public class admin_login {
 					//Mainclass.menu();
 					 if(admin_login.check1==1) {
 		            	   Mainclass.menu();
-					 }
-					 else {
-						 System.out.println("no data found");
-					 }
+					      }
 					 
-				}
+				   }
 				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			      } 
-	       }
-			  
-			  
-			  if(check1!=1) {
+			} 
+	        if(check1!=1) {
 				     System.out.println("Admin details not found");
-	            	System.out.println("Choose option above for selection:");
-	                
+	            	//System.out.println("Choose option above for selection:");
+	               
 	            }
 	           
 
 	    }
 		
-		@SuppressWarnings("static-access")
-		public void adlogin_details(ArrayList<admin_login> arr)
-		{
-			for(admin_login adlogin:arr)
-			{ System.out.println("Username:"+adlogin.adusername);
-			  System.out.println("Password:"+adlogin.adPassword);
-			}
-		}
-
-	}
+}
 

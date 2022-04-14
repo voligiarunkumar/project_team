@@ -226,6 +226,7 @@ public class Food_OrderingSystem {
     System.out.print("ENTER NUMNER TO CHOOSE :");
     choose = input.nextInt();
     or.setChoose_foodid(choose);
+    cart.setChoose_foodid(choose);
     ResultSet rs=st.executeQuery("select * from  foodtable where item_no="+choose);
      if(rs.next()) {
     String i_name = rs.getString(2);
@@ -255,7 +256,27 @@ public class Food_OrderingSystem {
         	   or.delivery();
         	   payment();
            case 2:
-        	   
+        	   cart.add_cart();
+        	   System.out.println("YOU WANT TO ADD ANYTHING? ");
+               System.out.println("Press Y for Yes and N for No : ");
+               more = input.next();
+               if(more.equalsIgnoreCase("Y")){
+            	   order();
+                   //cart.add_cart();
+                   
+                   
+                   }
+               else if(more.equalsIgnoreCase("N")) {
+            	   cart.display_cart();
+            	   cart.cart_operation();
+               }
+               else{
+               	System.out.println("You Enter Invalid value, Choose food again");
+               	total=0;
+               	order();
+               	}
+               break;
+           
         }}
     else{
     	System.out.println("You Enter Invalid value, Choose food again");
